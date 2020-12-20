@@ -239,7 +239,7 @@ exports.parseAlbumSearchResult = (context) => {
             sectionContext, 'musicResponsiveListItemFlexColumnRenderer'
         ))
         result.content.push(Object.freeze({
-            type: _.lowerCase(utils.fv(_.nth(flexColumn, 1), 'runs:text')),
+            type: _.lowerCase(_.nth(utils.fv(_.nth(flexColumn, 1), 'runs:text'), 0)),
             browseId: utils.fv(
                 _.at(
                     sectionContext, 'navigationEndpoint'
@@ -248,8 +248,8 @@ exports.parseAlbumSearchResult = (context) => {
             ),
             playlistId: utils.fv(sectionContext, 'toggledServiceEndpoint:playlistId', true),
             name: utils.fv(_.nth(flexColumn, 0), 'runs:text'),
-            artist: (utils.fv(_.nth(flexColumn, 2), 'runs:text')),
-            year: utils.fv(_.nth(flexColumn, 3), 'runs:text'),
+            artist: (_.nth(utils.fv(_.nth(flexColumn, 1), 'runs:text'), 2)),
+            year: _.nth(utils.fv(_.nth(flexColumn, 1), 'runs:text'), 4),
             thumbnails: utils.fv(sectionContext, 'musicThumbnailRenderer:thumbnails')
         }))
     })
